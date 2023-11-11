@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madison News</title>
     <style>
-        @font-face {
-            font-family: RobotoStuff;
-            src: url(fonts/Roboto-BoldItalic.ttf);
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 
         body {
             font-family: 'RobotoStuff', sans-serif;
@@ -31,7 +28,6 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            /* Center items on the page */
         }
 
         .box {
@@ -42,9 +38,7 @@
             border-radius: 5px;
             box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
             width: 60%;
-            /* Adjust the width as needed */
             box-sizing: border-box;
-            /* Include padding and border in the box's total width */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -65,6 +59,16 @@
             bottom: 0;
             width: 100%;
         }
+
+        /* Dropdown Styles */
+        .dropdown {
+            margin-bottom: 10px;
+        }
+
+        .dropdown select {
+            padding: 8px;
+            font-size: 16px;
+        }
     </style>
 </head>
 
@@ -73,6 +77,15 @@
     <header>
         <h1>UW Madison News!</h1>
         <p>Get caught up on what is happening in Madison!</p>
+
+        <!-- Dropdown for sorting -->
+        <div class="dropdown">
+            <label for="sort">Sort By:</label>
+            <select id="sort" onchange="sortData()">
+                <option value="date">Date</option>
+                <option value="alphabetical">Alphabetical</option>
+            </select>
+        </div>
     </header>
 
     <main id="main-container">
@@ -86,7 +99,16 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Fetch JSON data
-            fetch('your_json_data.json') // Replace 'your_json_data.json' with the path to your JSON file
+            fetch("http://localhost:8080/post/get", {
+                method: "POST",
+                body: JSON.stringify({
+                    format: "sorted-dates"
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    "Access-Control-Allow-Origin": "http://localhost:8080/"
+                }
+            }) // Replace 'your_json_data.json' with the path to your JSON file
                 .then(response => response.json())
                 .then(data => {
                     // Process JSON data and create HTML elements
