@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.InvalidParameterException;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,10 +33,11 @@ public class PostService {
         });
 
         // Parse format
-        String[] parsedFormat = format.split(":");
+        String[] splitFormat = format.split(":");
+        System.out.println(format);
 
         // Sort
-        switch (parsedFormat[0]) {
+        switch (splitFormat[0]) {
             case "unsorted":
                 break;
             case "sorted-dates":
@@ -44,10 +46,12 @@ public class PostService {
             case "sorted-alpha":
                 Collections.sort(posts, new AlphaComparator());
                 break;
+            default:
+                throw new InvalidParameterException("Invalid sort specifier.");
         }
 
         // Narrow by tags
-        for (int i = 1; i < parsedFormat.length; i++) {
+        for (int i = 1; i < splitFormat.length; i++) {
 
         }
 

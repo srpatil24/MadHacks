@@ -1,10 +1,8 @@
 package com.example.backend.posts;
 
+import com.example.backend.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,10 +17,11 @@ public class PostController {
         this.service = service;
     }
 
+    @CrossOrigin(origins = Constants.origin)
     @PostMapping("get")
-    public List<Post> getPosts(@RequestBody String format) {
+    public List<Post> getPosts(@RequestBody Format format) {
         try {
-            return service.getPosts(format);
+            return service.getPosts(format.format);
         } catch (IOException e) {
             // Error case
             System.out.println("Could not successfully parse database.");
