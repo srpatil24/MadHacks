@@ -1,9 +1,10 @@
 package com.example.backend;
 
-import com.example.backend.database.Post;
-import com.example.backend.database.PostService;
+import com.example.backend.posts.Post;
+import com.example.backend.posts.PostService;
 import com.example.backend.utility.Constants;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,7 +16,7 @@ import java.util.List;
 @SpringBootTest
 class BackEndApplicationTests {
 
-    @Test
+    @Disabled
     void generateTestDatabase() {
         // Create test post
         ArrayList<Post> posts = new ArrayList<>();
@@ -41,6 +42,36 @@ class BackEndApplicationTests {
         try {
             // Try to get the posts and print it out
             posts = service.getPosts("unsorted");
+            System.out.println(posts);
+        } catch (IOException e) {
+            // Couldn't read
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void sortTestDates() {
+        PostService service = new PostService();
+        List<Post> posts;
+
+        try {
+            // Try to get the posts and print it out
+            posts = service.getPosts("sorted-dates");
+            System.out.println(posts);
+        } catch (IOException e) {
+            // Couldn't read
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void sortTestAlpha() {
+        PostService service = new PostService();
+        List<Post> posts;
+
+        try {
+            // Try to get the posts and print it out
+            posts = service.getPosts("sorted-alpha");
             System.out.println(posts);
         } catch (IOException e) {
             // Couldn't read

@@ -1,4 +1,4 @@
-package com.example.backend.database;
+package com.example.backend.posts;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -39,6 +39,6 @@ public class Post {
 
     @Override
     public String toString() {
-        return "ID: " + uniqueID + "\nDate: " + date + "\nEvent Date: " + eventDate + "\nOrg Name: " + orgName + "\nPost Text: " + postText + "\nImage: " + image;
+        return "ID: " + uniqueID + "\nDate: " + date + "\nEvent Date: " + eventDate + "\nOrg Name: " + orgName + "\nPost Text: " + postText + "\nImage: " + image + "\n";
     }
 }

@@ -1,5 +1,7 @@
-package com.example.backend.database;
+package com.example.backend.posts;
 
+import com.example.backend.comparators.AlphaComparator;
+import com.example.backend.comparators.DatesComparator;
 import com.example.backend.utility.Constants;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -36,8 +39,10 @@ public class PostService {
             case "unsorted":
                 break;
             case "sorted-dates":
+                Collections.sort(posts, new DatesComparator());
                 break;
             case "sorted-alpha":
+                Collections.sort(posts, new AlphaComparator());
                 break;
         }
 
