@@ -98,39 +98,60 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Fetch JSON data
-            fetch("http://localhost:8080/post/get", {
-                method: "POST",
-                body: JSON.stringify({
-                    format: "sorted-dates"
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                    "Access-Control-Allow-Origin": "http://localhost:8080/"
-                }
-            }) // Replace 'your_json_data.json' with the path to your JSON file
-                .then(response => response.json())
-                .then(data => {
-                    // Process JSON data and create HTML elements
-                    const mainContainer = document.getElementById('main-container');
-                    data.forEach(item => {
-                        const box = document.createElement('div');
-                        box.className = 'box';
+            const mainContainer = document.getElementById('main-container');
 
-                        // Iterate over values in each JSON entry
-                        Object.entries(item).forEach(([key, value]) => {
-                            if (key !== 'uniqueID') {
-                                const fieldElement = document.createElement('p');
-                                fieldElement.innerHTML = `${value}`;
-                                box.appendChild(fieldElement);
-                            }
-                        });
+            function fetchDataAndDisplay(format) {
+                // Clear existing boxes
+                mainContainer.innerHTML = '';
 
-                        mainContainer.appendChild(box);
-                    });
+                // Fetch JSON data
+                fetch("http://localhost:8080/post/get", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        format: format
+                    }),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Access-Control-Allow-Origin": "http://localhost:8080/"
+                    }
                 })
-                .catch(error => console.error('Error fetching JSON:', error));
+                    .then(response => response.json())
+                    .then(data => {
+                        // Process JSON data and create HTML elements
+                        data.forEach(item => {
+                            const box = document.createElement('div');
+                            box.className = 'box';
+
+                            // Iterate over values in each JSON entry
+                            Object.entries(item).forEach(([key, value]) => {
+                                if (key !== 'uniqueID') {
+                                    const fieldElement = document.createElement('p');
+                                    fieldElement.innerHTML = `${value}`;
+                                    box.appendChild(fieldElement);
+                                }
+                            });
+
+                            mainContainer.appendChild(box);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching JSON:', error));
+            }
+
+            function sortData() {
+                const dropdown = document.getElementById('sort');
+                const selectedValue = dropdown.value;
+
+                if (selectedValue === 'date') {
+                    fetchDataAndDisplay('sorted-dates');
+                } else if (selectedValue === 'alphabetical') {
+                    fetchDataAndDisplay('sorted-alpha');
+                }
+            }
+
+            // Initial fetch and display
+            sortData();
         });
+
     </script>
 
 </body>
