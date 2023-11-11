@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.InvalidParameterException;
 import java.util.Collections;
 import java.util.List;
 
@@ -45,6 +46,8 @@ public class PostService {
             case "sorted-alpha":
                 Collections.sort(posts, new AlphaComparator());
                 break;
+            default:
+                throw new InvalidParameterException("Invalid sort specifier.");
         }
 
         // Narrow by tags
