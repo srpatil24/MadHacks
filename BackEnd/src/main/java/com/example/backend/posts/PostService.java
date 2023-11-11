@@ -32,10 +32,11 @@ public class PostService {
         });
 
         // Parse format
-        String[] parsedFormat = format.split(":");
+        String[] splitFormat = format.split(":");
+        System.out.println(format);
 
         // Sort
-        switch (parsedFormat[0]) {
+        switch (splitFormat[0]) {
             case "unsorted":
                 break;
             case "sorted-dates":
@@ -47,7 +48,7 @@ public class PostService {
         }
 
         // Narrow by tags
-        for (int i = 1; i < parsedFormat.length; i++) {
+        for (int i = 1; i < splitFormat.length; i++) {
 
         }
 

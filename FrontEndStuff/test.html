@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madison News</title>
     <style>
+
         @font-face {
             font-family: RobotoStuff;
             src: url(fonts/Roboto-BoldItalic.ttf);
@@ -51,7 +52,6 @@
             text-align: center;
             transition: transform 0.3s ease-in-out;
         }
-
         .box:hover {
             transform: scale(1.05);
         }
@@ -86,7 +86,16 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Fetch JSON data
-            fetch('your_json_data.json') // Replace 'your_json_data.json' with the path to your JSON file
+            fetch("http://localhost:8080/post/get", {
+                method: "POST",
+                body: JSON.stringify({  
+                    format: "unsorted"
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    "Access-Control-Allow-Origin": "http://localhost:8080"
+                }
+            }) // Replace 'your_json_data.json' with the path to your JSON file
                 .then(response => response.json())
                 .then(data => {
                     // Process JSON data and create HTML elements
