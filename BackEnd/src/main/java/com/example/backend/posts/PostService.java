@@ -33,13 +33,13 @@ public class PostService {
 
         String[] cmd;
         if (splitFormat.length > 1) {
-            cmd = new String[]{"python", "C:/Demo/myscript.py", splitFormat[1]};
+            cmd = new String[]{"python3", Constants.databasePath, splitFormat[1]};
         } else {
-            cmd = new String[]{"python", "C:/Demo/myscript.py"};
+            cmd = new String[]{"python3", Constants.databasePath};
         }
 
         Runtime.getRuntime().exec(cmd);
-        
+
         try {
             Thread.currentThread().wait(1000);
         } catch (InterruptedException e) {
