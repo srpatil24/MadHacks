@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,13 +29,28 @@ public class PostService {
      * @throws JsonProcessingException
      */
     public List<Post> getPosts(String format) throws IOException {
+        // Parse format
+        String[] splitFormat = format.split(":");
+
+        String pythonScriptPath = "/home/madhacks698/madhacks/MadHacks/BackEnd/src/main/java/com/example/backend/posts/get_json.py";
+        String[] cmd = null;
+
+        if (splitFormat.length > 1) {
+            cmd = new String[]{"python3", pythonScriptPath, splitFormat[1]};
+        }
+
+        ProcessBuilder pb = new ProcessBuilder(cmd);
+        Process p = pb.start();
+
+        try {
+            p.waitFor();
+        } catch (InterruptedException e) {
+            return new ArrayList<>();
+        }
+
         // Deserialize database from json
         List<Post> posts = new ObjectMapper().readValue(new File(Constants.databasePath), new TypeReference<List<Post>>() {
         });
-
-        // Parse format
-        String[] splitFormat = format.split(":");
-        System.out.println(format);
 
         // Sort
         switch (splitFormat[0]) {
@@ -48,11 +64,6 @@ public class PostService {
                 break;
             default:
                 throw new InvalidParameterException("Invalid sort specifier.");
-        }
-
-        // Narrow by tags
-        for (int i = 1; i < splitFormat.length; i++) {
-
         }
 
         return posts;
