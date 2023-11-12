@@ -1,42 +1,82 @@
 [
     {
-        "uniqueID": 0,
-        "date": 1699733260,
-        "eventDate": 1699733260,
-        "orgName": "Madhacks",
-        "postText": "Madhacks is at 5:00pm today!",
-        "image": "image"
+        "image": "https://i.imgur.com/qWQvNem.jpeg",
+        "caption": "Exciting Event!",
+        "clubName": "Tech Enthusiasts",
+        "date": "2023-11-15",
+        "clubDescription": "Exploring the world of technology.",
+        "twitter": "@TechEnthusiasts",
+        "facebook": "TechEnthusiastsPage",
+        "instagram": "tech_enthusiasts"
     },
     {
-        "uniqueID": 0,
-        "date": 1699733260,
-        "eventDate": 1699733260,
-        "orgName": "Madhacks",
-        "postText": "Madhacks is at 5:00pm today!",
-        "image": "image"
+        "image": "https://i.imgur.com/qWQvNem.jpeg",
+        "caption": "Don't Miss Out!",
+        "clubName": "Creative Minds",
+        "date": "2023-11-17",
+        "clubDescription": "Fostering creativity and innovation.",
+        "twitter": "@CreativeMinds",
+        "facebook": "CreativeMindsCommunity",
+        "instagram": "creative_minds"
     },
     {
-        "uniqueID": 0,
-        "date": 1699733260,
-        "eventDate": 1699733260,
-        "orgName": "Madhacks",
-        "postText": "Madhacks is at 5:00pm today!",
-        "image": "image"
+        "image": "https://i.imgur.com/qWQvNem.jpeg",
+        "caption": "Join the Fun!",
+        "clubName": "Sports Fanatics",
+        "date": "2023-11-20",
+        "clubDescription": "Passionate about sports and fitness.",
+        "twitter": "@SportsFanatics",
+        "facebook": "SportsFanaticsClub",
+        "instagram": "sports_fanatics"
     },
     {
-        "uniqueID": 0,
-        "date": 1699733260,
-        "eventDate": 1699733260,
-        "orgName": "Madhacks",
-        "postText": "Madhacks is at 5:00pm today!",
-        "image": "image"
+        "image": "https://i.imgur.com/qWQvNem.jpeg",
+        "caption": "Calling All Gamers!",
+        "clubName": "Game Changers",
+        "date": "2023-11-22",
+        "clubDescription": "Gaming community for all enthusiasts.",
+        "twitter": "@GameChangers",
+        "facebook": "GameChangersGuild",
+        "instagram": "game_changers"
     },
     {
-        "uniqueID": 0,
-        "date": 1699733260,
-        "eventDate": 1699733260,
-        "orgName": "Madhacks",
-        "postText": "Madhacks is at 5:00pm today!",
-        "image": "image"
+        "image": "https://i.imgur.com/qWQvNem.jpeg",
+        "caption": "Explore the Unknown!",
+        "clubName": "Discovery Club",
+        "date": "2023-11-25",
+        "clubDescription": "Curiosity-driven exploration and learning.",
+        "twitter": "@DiscoveryClub",
+        "facebook": "DiscoveryClubNetwork",
+        "instagram": "discovery_club"
+    },
+    {
+        "image": "https://i.imgur.com/qWQvNem.jpeg",
+        "caption": "Tech Talks Tonight!",
+        "clubName": "Code Ninjas",
+        "date": "2023-11-28",
+        "clubDescription": "Mastering the art of coding.",
+        "twitter": "@CodeNinjas",
+        "facebook": "CodeNinjasHQ",
+        "instagram": "code_ninjas"
+    },
+    {
+        "image": "https://i.imgur.com/qWQvNem.jpeg",
+        "caption": "Artistic Vibes",
+        "clubName": "Canvas Creators",
+        "date": "2023-12-01",
+        "clubDescription": "Expressing through art and design.",
+        "twitter": "@CanvasCreators",
+        "facebook": "CanvasCreatorsStudio",
+        "instagram": "canvas_creators"
+    },
+    {
+        "image": "https://i.imgur.com/qWQvNem.jpeg",
+        "caption": "Fitness Fanatics Unite!",
+        "clubName": "FitFam",
+        "date": "2023-12-05",
+        "clubDescription": "Promoting a healthy and active lifestyle.",
+        "twitter": "@FitFam",
+        "facebook": "FitFamCommunity",
+        "instagram": "fitfam_official"
     }
 ]
