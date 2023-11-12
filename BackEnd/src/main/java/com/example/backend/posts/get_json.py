@@ -75,10 +75,15 @@ club_categories = pd.read_sql_query("SELECT * FROM club_categories", conn)
 
 # print(to_json)
 # Add categories to json
+
+id_to_category = pd.read_sql_query("SELECT * FROM categories", conn)
+id_to_category = dict(zip(id_to_category['category_id'], id_to_category['category_name']))
+
 for index, row in to_json.iterrows():
     club_name = row['clubName']
     club_id = clubs[clubs['club_name'] == club_name].iloc[0]['club_id']
     club_category = club_categories[club_categories['club_id'] == club_id]['category_id'].values
+    club_category = [id_to_category[cat_id] for cat_id in club_category]
     to_json.at[index, 'category'] = club_category
 
 # Write df to json file
