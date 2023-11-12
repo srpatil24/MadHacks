@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
             color: #333;
-            background: #f2f2f2 url('https://i.imgur.com/nSVsDJ8.png') no-repeat center -200px fixed;
+            background: #f2f2f2 url('https://i.imgur.com/nSVsDJ8.png') no-repeat center -300px fixed;
             background-size: cover;
         }
 
@@ -205,15 +205,19 @@
                                         const iconImgElement = document.createElement('img');
                                         iconImgElement.src = `${key}_icon.png`; // Update with the actual icon image source
                                         iconImgElement.alt = `${key} icon`;
+                                        iconImgElement.referrerPolicy = 'no-referrer';
 
                                         switch (key) {
                                             case 'twitter':
+                                            iconImgElement.src = `https://i.imgur.com/6C7RqQX.png`;
                                                 iconImg.href = `https://twitter.com/${value}`; // Append the Twitter handle
                                                 break;
                                             case 'instagram':
+                                            iconImgElement.src = `https://i.imgur.com/luCq4h7.png`;
                                                 iconImg.href = `https://www.instagram.com/${value}`; // Append the Instagram handle
                                                 break;
                                             case 'facebook':
+                                            iconImgElement.src = `https://i.imgur.com/jLmedlg.png`;
                                                 iconImg.href = `https://www.facebook.com/${value}`; // Append the Facebook username or page name
                                                 break;
                                             default:
