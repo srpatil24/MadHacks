@@ -164,7 +164,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const mainContainer = document.getElementById('main-container');
-    
+
             function createImageElement(src) {
                 var imgElement = document.createElement('img');
                 imgElement.src = src + "?not-from-cache-please";
@@ -172,21 +172,21 @@
                 imgElement.alt = 'Image';
                 imgElement.crossOrigin = "anonymous";
                 imgElement.style.display = 'none'; // Initially hide the image
-    
+
                 // Event listener to show the image once it's loaded
                 imgElement.onload = function () {
                     imgElement.style.display = 'block'; // Show the image
                     imgElement.style.maxHeight = '100%';
                     imgElement.style.maxWidth = '100%';
                 };
-    
+
                 return imgElement;
             }
-    
+
             function fetchDataAndDisplay(format) {
                 // Clear existing boxes
                 mainContainer.innerHTML = '';
-    
+
                 // Fetch JSON data
                 fetch("http://35.184.184.255:5500/post/get", {
                     method: "POST",
@@ -204,11 +204,11 @@
                         data.forEach(item => {
                             const box = document.createElement('div');
                             box.className = 'box';
-    
+
                             const socialMediaIcon = document.createElement('a');
                             socialMediaIcon.className = 'social-media-icon';
                             socialMediaIcon.target = '_blank';
-    
+
                             Object.entries(item).forEach(([key, value]) => {
                                 if (key !== 'uniqueID' && key !== 'caption' && key !== 'clubDescription') {
                                     if (key === 'image') {
@@ -216,31 +216,76 @@
                                         var imgElement = createImageElement(value);
                                         box.appendChild(imgElement);
                                     } else if (['twitter', 'instagram', 'facebook'].includes(key)) {
-                                        // Existing social media icon logic
-                                        // ...
+                                        const iconImg = document.createElement('a');
+                                        iconImg.href = ''; // Update with the correct link
+
+                                        const iconImgElement = document.createElement('img');
+                                        iconImgElement.src = `${key}_icon.png`; // Update with the actual icon image source
+                                        iconImgElement.alt = `${key} icon`;
+                                        iconImgElement.referrerPolicy = 'no-referrer';
+
+                                        switch (key) {
+                                            case 'twitter':
+                                                iconImgElement.src = `https://i.imgur.com/6C7RqQX.png`;
+                                                iconImg.href = value; // Append the Twitter handle
+                                                break;
+                                            case 'instagram':
+                                                iconImgElement.src = `https://i.imgur.com/luCq4h7.png`;
+                                                iconImg.href = value; // Append the Instagram handle
+                                                break;
+                                            case 'facebook':
+                                                iconImgElement.src = `https://i.imgur.com/jLmedlg.png`;
+                                                iconImg.href = value; // Append the Facebook username or page name
+
+                                                break;
+                                            default:
+                                                iconImg.href = '#'; // Default to a placeholder link if the key is not recognized
+                                        }
+
+                                        iconImgElement.style.height = '90%';
+                                        iconImgElement.style.width = '30%';
+
+                                        iconImg.appendChild(iconImgElement);
+                                        socialMediaIcon.appendChild(iconImg);
                                     } else {
                                         const fieldElement = document.createElement('p');
-                                        fieldElement.innerHTML = `${value}`;
-                                        // Existing class assignment logic
-                                        // ...
+                                        fieldElement.innerHTML = ${value};
+
+                                        // Apply styles based on the field type
+                                        if (key === 'date') {
+                                            fieldElement.className = 'date';
+                                        } else if (key === 'clubName') {
+                                            fieldElement.className = 'clubName';
+                                        } else if (key === 'clubDescription') {
+                                            fieldElement.className = 'clubDescription';
+                                        }
+
                                         box.appendChild(fieldElement);
                                     }
                                 }
                             });
-    
+
                             box.appendChild(socialMediaIcon);
                             mainContainer.appendChild(box);
                         });
                     })
                     .catch(error => console.error('Error fetching JSON:', error));
             }
-    
-            // Existing sortData function
-            // ...
-    
+
+            function sortData() {
+                const dropdown = document.getElementById('sort');
+                const selectedValue = dropdown.value;
+
+                if (selectedValue === 'date') {
+                    fetchDataAndDisplay('sorted-dates');
+                } else if (selectedValue === 'alphabetical') {
+                    fetchDataAndDisplay('sorted-alpha');
+                }
+            }
+
             // Initial fetch and display
             sortData();
-    
+
             var dropdown = document.querySelector(".dropdown select");
             dropdown.addEventListener('change', function () {
                 console.log('Dropdown value changed to: ' + dropdown.value);
