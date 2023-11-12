@@ -30,11 +30,14 @@ public class Post {
     @JsonProperty("instagram")
     public String instagram;
 
+    @JsonProperty("category")
+    public String category;
+    
     public Post() {
 
     }
 
-    public Post(String image, String caption, String clubName, String date, String clubDescription, String twitter, String facebook, String instagram) {
+    public Post(String image, String caption, String clubName, String date, String clubDescription, String twitter, String facebook, String instagram, String category) {
         this.image = image;
         this.caption = caption;
         this.clubName = clubName;
@@ -43,6 +46,7 @@ public class Post {
         this.twitter = twitter;
         this.facebook = facebook;
         this.instagram = instagram;
+        this.category = category;
     }
 
     @Override

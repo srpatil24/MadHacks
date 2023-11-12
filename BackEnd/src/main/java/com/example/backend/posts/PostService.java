@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,19 +32,20 @@ public class PostService {
         // Parse format
         String[] splitFormat = format.split(":");
 
-        String[] cmd;
-        if (splitFormat.length > 0) {
-            cmd = new String[]{"python3", "/home/madhacks698/madhacks/MadHacks/BackEnd/src/main/java/com/example/backend/posts/get_json.py", splitFormat[1]};
-        } else {
-            cmd = new String[]{"python3", "/home/madhacks698/madhacks/MadHacks/BackEnd/src/main/java/com/example/backend/posts/get_json.py"};
-        }
-
-        Runtime.getRuntime().exec(cmd);
-
         // Deserialize database from json
         List<Post> posts = new ObjectMapper().readValue(new File(Constants.databasePath), new TypeReference<List<Post>>() {
         });
 
+        if (splitFormat.length > 1) {
+            ArrayList<Post> temp = new ArrayList<>();
+            for (Post post : posts) {
+                if (post.category.equals(splitFormat[1])) {
+                    temp.add(post);
+                }
+            }
+            posts = temp;
+        }
+        
         // Sort
         switch (splitFormat[0]) {
             case "unsorted":
