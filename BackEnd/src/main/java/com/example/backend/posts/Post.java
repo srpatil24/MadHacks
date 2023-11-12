@@ -6,39 +6,48 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Represents a single post.
  */
 public class Post {
-    @JsonProperty("uniqueID")
-    public int uniqueID;
-
-    @JsonProperty("date")
-    public int date;
-
-    @JsonProperty("eventDate")
-    public int eventDate;
-
-    @JsonProperty("orgName")
-    public String orgName;
-
-    @JsonProperty("postText")
-    public String postText;
-
     @JsonProperty("image")
     public String image;
+
+    @JsonProperty("caption")
+    public String caption;
+
+    @JsonProperty("clubName")
+    public String clubName;
+
+    @JsonProperty("date")
+    public String date;
+
+    @JsonProperty("clubDescription")
+    public String clubDescription;
+
+    @JsonProperty("twitter")
+    public String twitter;
+
+    @JsonProperty("facebook")
+    public String facebook;
+
+    @JsonProperty("instagram")
+    public String instagram;
 
     public Post() {
 
     }
 
-    public Post(int uniqueID, int date, int eventDate, String orgName, String postText, String image) {
-        this.uniqueID = uniqueID;
-        this.date = date;
-        this.eventDate = eventDate;
-        this.orgName = orgName;
-        this.postText = postText;
+    public Post(String image, String caption, String clubName, String date, String clubDescription, String twitter, String facebook, String instagram) {
         this.image = image;
+        this.caption = caption;
+        this.clubName = clubName;
+        this.date = date;
+        this.clubDescription = clubDescription;
+        this.twitter = twitter;
+        this.facebook = facebook;
+        this.instagram = instagram;
     }
 
     @Override
     public String toString() {
-        return "ID: " + uniqueID + "\nDate: " + date + "\nEvent Date: " + eventDate + "\nOrg Name: " + orgName + "\nPost Text: " + postText + "\nImage: " + image + "\n";
+        return "Image: " + image + "\nCaption: " + caption + "\nClubName: " + clubName + "\nDate: " + date + "\nclubDescription: " + clubDescription + "\n" +
+                "Twitter: " + twitter + "\nFacebook: " + facebook + "\nInstagram: " + instagram;
     }
 }

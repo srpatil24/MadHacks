@@ -20,11 +20,14 @@ class BackEndApplicationTests {
     void generateTestDatabase() {
         // Create test post
         ArrayList<Post> posts = new ArrayList<>();
+
+        /*
         posts.add(new Post(0, 1699733260, 1699733260, "Madhacks", "Madhacks is at 5:00pm today!", "image"));
         posts.add(new Post(0, 1699733260, 1699733260, "Madhacks", "Madhacks is at 5:00pm today!", "image"));
         posts.add(new Post(0, 1699733260, 1699733260, "Madhacks", "Madhacks is at 5:00pm today!", "image"));
         posts.add(new Post(0, 1699733260, 1699733260, "Madhacks", "Madhacks is at 5:00pm today!", "image"));
         posts.add(new Post(0, 1699733260, 1699733260, "Madhacks", "Madhacks is at 5:00pm today!", "image"));
+        */
 
         try {
             new ObjectMapper().writeValue(new File(Constants.databasePath), posts);
