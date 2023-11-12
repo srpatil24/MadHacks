@@ -1,4 +1,4 @@
-window.initialAppState = {
+{
     "institution": null,
     "coverPhoto": {
         "id": 33292,
