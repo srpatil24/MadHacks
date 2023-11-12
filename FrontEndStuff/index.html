@@ -192,10 +192,10 @@
                                     if (key === 'image') {
                                         // If the field is 'image', create an img element
                                         var imgElement = document.createElement('img');
-                                        imgElement.src = value+"?not-from-cache-please";
+                                        imgElement.crossOrigin = "anonymous";
+                                        imgElement.src = value;
                                         imgElement.referrerPolicy = "no-referrer";
                                         imgElement.alt = 'Image';
-                                        imgElement.crossOrigin = "anonymous";
                                         imgElement.style.maxHeight = '100%';
                                         imgElement.style.maxWidth = '100%';
                                         box.appendChild(imgElement);
