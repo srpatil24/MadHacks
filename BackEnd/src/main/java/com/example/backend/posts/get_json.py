@@ -59,9 +59,5 @@ for index, row in recent_posts.iterrows():
 # if category:
 #     to_json = to_json[to_json['clubName'] == category]
 
-
-# Make date prettier
-to_json["date"] = pd.to_datetime(to_json["date"]).dt.strftime("%B %d, %Y")
-
 # Write df to json file
 to_json.to_json("posts.json", orient="records")
