@@ -12,7 +12,7 @@ else:
     category = None
 
 # Connect to database
-path_to_db = "../../../../../../../../WebScraping/clubs.db"
+path_to_db = "/home/madhacks698/madhacks/MadHacks/WebScraping/clubs.db"
 
 conn = sqlite3.connect(path_to_db)
 c = conn.cursor()
