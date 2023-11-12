@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,20 +31,19 @@ public class PostService {
         // Parse format
         String[] splitFormat = format.split(":");
 
-        String pythonScriptPath = "/home/madhacks698/madhacks/MadHacks/BackEnd/src/main/java/com/example/backend/posts/get_json.py";
-        String[] cmd = new String[]{"python3", pythonScriptPath};
-
+        String[] cmd;
         if (splitFormat.length > 1) {
-            cmd = new String[]{"python3", pythonScriptPath, splitFormat[1]};
+            cmd = new String[]{"python", "C:/Demo/myscript.py", splitFormat[1]};
+        } else {
+            cmd = new String[]{"python", "C:/Demo/myscript.py"};
         }
 
-        ProcessBuilder pb = new ProcessBuilder(cmd);
-        Process p = pb.start();
-
+        Runtime.getRuntime().exec(cmd);
+        
         try {
-            p.waitFor();
+            Thread.currentThread().wait(1000);
         } catch (InterruptedException e) {
-            return new ArrayList<>();
+            // Ignore
         }
 
         // Deserialize database from json
