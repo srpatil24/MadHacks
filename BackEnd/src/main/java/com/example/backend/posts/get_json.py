@@ -64,7 +64,6 @@ category_mapping = pd.read_sql_query("SELECT * FROM categories", conn)
 category_mapping = dict(zip(category_mapping['category_name'], category_mapping['category_id']))
 
 # # Filter by category if specified
-print(to_json.columns)
 if category:
     for index, row in to_json.iterrows():
         club_name = row['clubName']
@@ -76,7 +75,7 @@ if category:
 
 
 # Make date prettier
-to_json["date"] = pd.to_datetime(to_json["date"]).dt.strftime("%B %d, %Y")
+#to_json["date"] = pd.to_datetime(to_json["date"]).dt.strftime("%B %d, %Y")
 
 
 # Write df to json file
