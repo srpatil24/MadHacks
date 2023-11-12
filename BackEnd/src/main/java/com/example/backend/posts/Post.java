@@ -32,7 +32,7 @@ public class Post {
 
     @JsonProperty("category")
     public String category;
-    
+
     public Post() {
 
     }

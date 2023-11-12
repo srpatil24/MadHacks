@@ -39,13 +39,18 @@ public class PostService {
         if (splitFormat.length > 1) {
             ArrayList<Post> temp = new ArrayList<>();
             for (Post post : posts) {
-                if (post.category.equals(splitFormat[1])) {
-                    temp.add(post);
+                String[] categories = post.category.split(":");
+
+                for (String aCategory : categories) {
+                    if (aCategory.equals(splitFormat[1])) {
+                        temp.add(post);
+                        break;
+                    }
                 }
             }
             posts = temp;
         }
-        
+
         // Sort
         switch (splitFormat[0]) {
             case "unsorted":
