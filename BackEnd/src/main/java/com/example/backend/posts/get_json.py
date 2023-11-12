@@ -73,14 +73,11 @@ if category:
         if category_mapping[category] not in club_cat_ids['category_id'].values:
             to_json.drop(index, inplace=True)
 
-<<<<<<< HEAD
+
 
 # Make date prettier
 to_json["date"] = pd.to_datetime(to_json["date"]).dt.strftime("%B %d, %Y")
 
 
-
-=======
->>>>>>> af340e3b70d9e4128fa277eedd228caf78b2c02c
 # Write df to json file
 to_json.to_json("posts.json", orient="records")
