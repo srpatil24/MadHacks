@@ -33,9 +33,9 @@ public class PostService {
 
         String[] cmd;
         if (splitFormat.length > 1) {
-            cmd = new String[]{"python3", Constants.databasePath, splitFormat[1]};
+            cmd = new String[]{"python3", "/home/madhacks698/madhacks/MadHacks/BackEnd/src/main/java/com/example/backend/posts/get_json.py", splitFormat[1]};
         } else {
-            cmd = new String[]{"python3", Constants.databasePath};
+            cmd = new String[]{"python3", "/home/madhacks698/madhacks/MadHacks/BackEnd/src/main/java/com/example/backend/posts/get_json.py"};
         }
 
         Runtime.getRuntime().exec(cmd);
