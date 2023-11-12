@@ -5,7 +5,9 @@ import time
 import datetime
 import pandas as pd
 
-# args = sys.argv[1]
+args = sys.argv
+if len(args) > 1:
+    category = args[1]
 
 # Connect to database
 path_to_db = "../../../../../../../../WebScraping/clubs.db"
@@ -51,6 +53,11 @@ for index, row in recent_posts.iterrows():
         to_json.at[index, 'instagram'] = club_info.get('instagramUrl')
         to_json.at[index, 'facebook'] = club_info.get('facebookUrl')
         to_json.at[index, 'clubDescription'] = club_info.get('description')
+        
+        
+# # Filter by category if specified
+# if category:
+#     to_json = to_json[to_json['clubName'] == category]
 
 # Write df to json file
 to_json.to_json("posts.json", orient="records")
