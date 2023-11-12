@@ -192,7 +192,7 @@
                                     if (key === 'image') {
                                         // If the field is 'image', create an img element
                                         var imgElement = document.createElement('img');
-                                        imgElement.src = value;
+                                        imgElement.src = value+"?not-from-cache-please";
                                         imgElement.referrerPolicy = "no-referrer";
                                         imgElement.alt = 'Image';
                                         imgElement.crossOrigin = "anonymous";
