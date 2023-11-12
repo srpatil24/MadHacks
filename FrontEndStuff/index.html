@@ -141,13 +141,34 @@
                 <h1>The Badger Bulletin!</h1>
                 <p>Get caught up on what is happening in Madison!</p>
 
-                <div class="dropdown">
+                <div class="dropdown" name="sort">
                     <label for="sort">Sort By:</label>
                     <select id="sort" onchange="sortData()">
                         <option value="date">Date</option>
                         <option value="alphabetical">Alphabetical</option>
                     </select>
                 </div>
+
+                <div class="dropdown" name="category">
+                    <label for="category">Filter By:</label>
+                    <select id="category" onchange="filterData()">
+                        <option value="Arts/Music">Arts/Music</option>
+                        <option value="Cultural/Ethnic">Cultural/Ethnic</option>
+                        <option value="Honorary">Honorary</option>
+                        <option value="Religious/Spiritual">Religious/Spiritual</option>
+                        <option value="Service/Volunteer">Service/Volunteer</option>
+                        <option value="Social Fraternity/Sorority">Social Fraternity/Sorority</option>
+                        <option value="Sports/Recreation">Sports/Recreation</option>
+                        <option value="Health/Wellness">Health/Wellness</option>
+                        <option value="Graduate/Professional">Graduate/Professional</option>
+                        <option value="Agricultural/Environmental">Agricultural/Environmental</option>
+                        <option value="Media/Publication">Media/Publication</option>
+                        <option value="Activism/Advocacy">Activism/Advocacy</option>
+                        <option value="Political Interest">Political Interest</option>
+                        <option value="Academic/Career">Academic/Career</option>
+                    </select>
+                </div>
+
             </div>
         </header>
 
@@ -263,14 +284,19 @@
             }
 
             function sortData() {
-                const dropdown = document.getElementById('sort');
-                const selectedValue = dropdown.value;
+                const sortDropdown = document.getElementById('sort');
+                const selectedValue = sortDropdown.value;
+
+                const categoryDropdown = document.getElementById('category');
+                const categorySelectedVal = categoryDropdown.value;
 
                 if (selectedValue === 'date') {
-                    fetchDataAndDisplay('sorted-dates');
+                    fetchDataAndDisplay('sorted-dates:' + categorySelectedVal);
                 } else if (selectedValue === 'alphabetical') {
-                    fetchDataAndDisplay('sorted-alpha');
+                    fetchDataAndDisplay('sorted-alpha:' + categorySelectedVal);
                 }
+
+
             }
 
             function wait() {
@@ -283,12 +309,20 @@
             // Initial fetch and display
             sortData();
 
-            var dropdown = document.querySelector(".dropdown select");
+            var sortDropdown = document.querySelector(".dropdown select#sort");
+            var categoryDropdown = document.querySelector(".dropdown select#category");
 
-            dropdown.addEventListener('change', function () {
-                console.log('Dropdown value changed to: ' + dropdown.value);
+            sortDropdown.addEventListener('change', function () {
+                console.log('Dropdown value changed to: ' + sortDropdown.value);
                 sortData();
             });
+
+            categoryDropdown.addEventListener('change', function () {
+                console.log('Dropdown value changed to: ' + categoryDropdown.value);
+                sortData();
+            });
+
+
         });
     </script>
 
