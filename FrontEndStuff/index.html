@@ -72,11 +72,13 @@
             justify-content: space-between;
             width: 100%;
             flex-direction: row;
-            margin-top: 10px; /* Added margin for space between social media icons */
+            margin-top: 10px;
+            /* Added margin for space between social media icons */
         }
 
         .social-media-container a {
-            margin-right: 10px; /* Adjusted margin for space between social media icons */
+            margin-right: 10px;
+            /* Adjusted margin for space between social media icons */
         }
 
         .social-media-container p {
@@ -122,7 +124,8 @@
         }
 
         .box p.clubDescription {
-            font-size: 14px; /* Adjusted font size */
+            font-size: 14px;
+            /* Adjusted font size */
             font-style: italic;
         }
     </style>
@@ -131,7 +134,8 @@
 <body>
     <div>
         <header>
-            <img src="https://cdn.discordapp.com/attachments/1172971735142903909/1173171986898370631/buckyReadingNewspaper.png" alt="Logo" referrerpolicy="no-referrer">
+            <img src="https://cdn.discordapp.com/attachments/1172971735142903909/1173171986898370631/buckyReadingNewspaper.png"
+                alt="Logo" referrerpolicy="no-referrer">
 
             <div>
                 <h1>Bucky Bulletin!</h1>
@@ -188,11 +192,12 @@
                             socialMediaIcon.target = '_blank';
 
                             Object.entries(item).forEach(([key, value]) => {
+                                wait();
                                 if (key !== 'uniqueID' && key !== 'caption' && key !== 'clubDescription') {
                                     if (key === 'image') {
                                         // If the field is 'image', create an img element
                                         var imgElement = document.createElement('img');
-                                        imgElement.src = value+"?not-from-cache-please";
+                                        imgElement.src = value + "?not-from-cache-please";
                                         imgElement.referrerPolicy = "no-referrer";
                                         imgElement.alt = 'Image';
                                         imgElement.crossOrigin = "anonymous";
@@ -210,6 +215,7 @@
 
                                         switch (key) {
                                             case 'twitter':
+<<<<<<< Updated upstream
                                             iconImgElement.src = `https://i.imgur.com/6C7RqQX.png`;
                                                 iconImg.href = value; // Append the Twitter handle
                                                 break;
@@ -220,6 +226,18 @@
                                             case 'facebook':
                                             iconImgElement.src = `https://i.imgur.com/jLmedlg.png`;
                                                 iconImg.href = value; // Append the Facebook username or page name
+=======
+                                                iconImgElement.src = `https://i.imgur.com/6C7RqQX.png`;
+                                                iconImg.href = `https://twitter.com/${value}`; // Append the Twitter handle
+                                                break;
+                                            case 'instagram':
+                                                iconImgElement.src = `https://i.imgur.com/luCq4h7.png`;
+                                                iconImg.href = `https://www.instagram.com/${value}`; // Append the Instagram handle
+                                                break;
+                                            case 'facebook':
+                                                iconImgElement.src = `https://i.imgur.com/jLmedlg.png`;
+                                                iconImg.href = `https://www.facebook.com/${value}`; // Append the Facebook username or page name
+>>>>>>> Stashed changes
                                                 break;
                                             default:
                                                 iconImg.href = '#'; // Default to a placeholder link if the key is not recognized
@@ -264,6 +282,13 @@
                 } else if (selectedValue === 'alphabetical') {
                     fetchDataAndDisplay('sorted-alpha');
                 }
+            }
+
+            function wait() {
+                setTimeout(function () {
+                    // Code to be executed after 0.1 seconds
+                    //console.log("Waited for 0.1 seconds!");
+                }, 100);
             }
 
             // Initial fetch and display
