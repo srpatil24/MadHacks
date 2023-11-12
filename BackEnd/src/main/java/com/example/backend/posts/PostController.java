@@ -21,7 +21,7 @@ public class PostController {
     @PostMapping("get")
     public List<Post> getPosts(@RequestBody Format format) {
         try {
-            return service.getPosts(format.format);
+            return service.getPosts(format.format).subList(0, 20);
         } catch (IOException e) {
             // Error case
             System.out.println("Could not successfully parse database.");

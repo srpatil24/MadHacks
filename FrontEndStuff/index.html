@@ -198,8 +198,8 @@
                                         // If the field is 'image', create an img element
                                         var imgElement = document.createElement('img');
                                         
-                                        imgElement.crossOrigin = "anonymous";
-                                        imgElement.src = value;
+                                        imgElement.src = value+"?not-from-cache-please" ;
+                                        imgElement.crossOrigin = "anonymous"
                                         imgElement.referrerPolicy = "no-referrer";
                                         imgElement.alt = 'Image';
                                         imgElement.style.maxHeight = '100%';
