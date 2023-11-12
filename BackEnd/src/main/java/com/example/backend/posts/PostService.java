@@ -58,7 +58,6 @@ public class PostService {
                 throw new InvalidParameterException("Invalid sort specifier.");
         }
 
-        System.out.println(posts);
         return posts;
     }
 
