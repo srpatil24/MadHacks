@@ -40,12 +40,6 @@ public class PostService {
 
         Runtime.getRuntime().exec(cmd);
 
-        try {
-            Thread.currentThread().wait(1000);
-        } catch (InterruptedException e) {
-            // Ignore
-        }
-
         // Deserialize database from json
         List<Post> posts = new ObjectMapper().readValue(new File(Constants.databasePath), new TypeReference<List<Post>>() {
         });
