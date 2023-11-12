@@ -163,90 +163,95 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Fetch JSON data
-            fetch("http://35.184.184.255:5500/post/get", {
-                method: "POST",
-                body: JSON.stringify({
-                    format: format
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                    "Access-Control-Allow-Origin": "*"
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    // Process JSON data and create HTML elements
-                    const mainContainer = document.getElementById('main-container');
-                    data.forEach(item => {
-                        const box = document.createElement('div');
-                        box.className = 'box';
 
-                        const socialMediaIcon = document.createElement('a');
-                        socialMediaIcon.className = 'social-media-icon';
-                        socialMediaIcon.target = '_blank';
-
-                        Object.entries(item).forEach(([key, value]) => {
-                            if (key !== 'uniqueID') {
-                                if (key === 'image') {
-                                    // If the field is 'image', create an img element
-                                    var imgElement = document.createElement('img');
-                                    imgElement.src = value;
-                                    imgElement.referrerPolicy = "no-referrer";
-                                    imgElement.alt = 'Image';
-                                    imgElement.style.maxHeight = '100%';
-                                    imgElement.style.maxWidth = '100%';
-                                    box.appendChild(imgElement);
-                                } else if (['twitter', 'instagram', 'facebook'].includes(key)) {
-                                    const iconImg = document.createElement('a');
-                                    iconImg.href = ''; // Update with the correct link
-
-                                    const iconImgElement = document.createElement('img');
-                                    iconImgElement.src = `${key}_icon.png`; // Update with the actual icon image source
-                                    iconImgElement.alt = `${key} icon`;
-
-                                    switch (key) {
-                                        case 'twitter':
-                                            iconImg.href = `https://twitter.com/${value}`; // Append the Twitter handle
-                                            break;
-                                        case 'instagram':
-                                            iconImg.href = `https://www.instagram.com/${value}`; // Append the Instagram handle
-                                            break;
-                                        case 'facebook':
-                                            iconImg.href = `https://www.facebook.com/${value}`; // Append the Facebook username or page name
-                                            break;
-                                        default:
-                                            iconImg.href = '#'; // Default to a placeholder link if the key is not recognized
-                                    }
-
-                                    iconImgElement.style.height = '30%';
-                                    iconImgElement.style.width = '30%';
-
-                                    iconImg.appendChild(iconImgElement);
-                                    socialMediaIcon.appendChild(iconImg);
-                                } else {
-                                    const fieldElement = document.createElement('p');
-                                    fieldElement.innerHTML = `${value}`;
-
-                                    // Apply styles based on the field type
-                                    if (key === 'date') {
-                                        fieldElement.className = 'date';
-                                    } else if (key === 'clubName') {
-                                        fieldElement.className = 'clubName';
-                                    } else if (key === 'clubDescription') {
-                                        fieldElement.className = 'clubDescription';
-                                    }
-
-                                    box.appendChild(fieldElement);
-                                }
-                            }
-                        });
-
-                        box.appendChild(socialMediaIcon);
-                        mainContainer.appendChild(box);
-                    });
+            function fetchDataAndDisplay(format) {
+                // Clear existing boxes
+                mainContainer.innerHTML = '';
+                fetch("http://35.184.184.255:5500/post/get", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        format: format
+                    }),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Access-Control-Allow-Origin": "*"
+                    }
                 })
-                .catch(error => console.error('Error fetching JSON:', error));
-        });
+                    .then(response => response.json())
+                    .then(data => {
+                        // Process JSON data and create HTML elements
+                        const mainContainer = document.getElementById('main-container');
+                        data.forEach(item => {
+                            const box = document.createElement('div');
+                            box.className = 'box';
+
+                            const socialMediaIcon = document.createElement('a');
+                            socialMediaIcon.className = 'social-media-icon';
+                            socialMediaIcon.target = '_blank';
+
+                            Object.entries(item).forEach(([key, value]) => {
+                                if (key !== 'uniqueID' && key !== 'clubDescription') {
+                                    if (key === 'image') {
+                                        // If the field is 'image', create an img element
+                                        var imgElement = document.createElement('img');
+                                        imgElement.src = value;
+                                        imgElement.referrerPolicy = "no-referrer";
+                                        imgElement.alt = 'Image';
+                                        imgElement.style.maxHeight = '100%';
+                                        imgElement.style.maxWidth = '100%';
+                                        box.appendChild(imgElement);
+                                    } else if (['twitter', 'instagram', 'facebook'].includes(key)) {
+                                        const iconImg = document.createElement('a');
+                                        iconImg.href = ''; // Update with the correct link
+
+                                        const iconImgElement = document.createElement('img');
+                                        iconImgElement.src = `${key}_icon.png`; // Update with the actual icon image source
+                                        iconImgElement.alt = `${key} icon`;
+
+                                        switch (key) {
+                                            case 'twitter':
+                                                iconImg.href = `https://twitter.com/${value}`; // Append the Twitter handle
+                                                break;
+                                            case 'instagram':
+                                                iconImg.href = `https://www.instagram.com/${value}`; // Append the Instagram handle
+                                                break;
+                                            case 'facebook':
+                                                iconImg.href = `https://www.facebook.com/${value}`; // Append the Facebook username or page name
+                                                break;
+                                            default:
+                                                iconImg.href = '#'; // Default to a placeholder link if the key is not recognized
+                                        }
+
+                                        iconImgElement.style.height = '30%';
+                                        iconImgElement.style.width = '30%';
+
+                                        iconImg.appendChild(iconImgElement);
+                                        socialMediaIcon.appendChild(iconImg);
+                                    } else {
+                                        const fieldElement = document.createElement('p');
+                                        fieldElement.innerHTML = `${value}`;
+
+                                        // Apply styles based on the field type
+                                        if (key === 'date') {
+                                            fieldElement.className = 'date';
+                                        } else if (key === 'clubName') {
+                                            fieldElement.className = 'clubName';
+                                        } else if (key === 'clubDescription') {
+                                            fieldElement.className = 'clubDescription';
+                                        }
+
+                                        box.appendChild(fieldElement);
+                                    }
+                                }
+                            });
+
+                            box.appendChild(socialMediaIcon);
+                            mainContainer.appendChild(box);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching JSON:', error));
+                }
+            });
 
         function sortData() {
             const dropdown = document.getElementById('sort');
