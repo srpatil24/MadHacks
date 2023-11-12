@@ -72,11 +72,13 @@
             justify-content: space-between;
             width: 100%;
             flex-direction: row;
-            margin-top: 10px; /* Added margin for space between social media icons */
+            margin-top: 10px;
+            /* Added margin for space between social media icons */
         }
 
         .social-media-container a {
-            margin-right: 10px; /* Adjusted margin for space between social media icons */
+            margin-right: 10px;
+            /* Adjusted margin for space between social media icons */
         }
 
         .social-media-container p {
@@ -122,7 +124,8 @@
         }
 
         .box p.clubDescription {
-            font-size: 14px; /* Adjusted font size */
+            font-size: 14px;
+            /* Adjusted font size */
             font-style: italic;
         }
     </style>
@@ -160,17 +163,16 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Fetch JSON data
-            // Fetch JSON data
             fetch("http://35.184.184.255:5500/post/get", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        format: format
-                    }),
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8",
-                        "Access-Control-Allow-Origin": "*"
-                    }
-                })
+                method: "POST",
+                body: JSON.stringify({
+                    format: format
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    "Access-Control-Allow-Origin": "*"
+                }
+            })
                 .then(response => response.json())
                 .then(data => {
                     // Process JSON data and create HTML elements
@@ -184,7 +186,7 @@
                         socialMediaIcon.target = '_blank';
 
                         Object.entries(item).forEach(([key, value]) => {
-                            if (key !== 'uniqueID' && key !== 'clubDescription') {
+                            if (key !== 'uniqueID') {
                                 if (key === 'image') {
                                     // If the field is 'image', create an img element
                                     var imgElement = document.createElement('img');
@@ -247,13 +249,26 @@
         });
 
         function sortData() {
-            const sortSelect = document.getElementById('sort');
-            const selectedOption = sortSelect.value;
+            const dropdown = document.getElementById('sort');
+            const selectedValue = dropdown.value;
 
-            console.log('Sorting data by:', selectedOption);
-            // Implement sorting logic based on the selected option
-            // You can modify this part based on your data structure and sorting requirements
+            if (selectedValue === 'date') {
+                fetchDataAndDisplay('sorted-dates');
+            } else if (selectedValue === 'alphabetical') {
+                fetchDataAndDisplay('sorted-alpha');
+            }
         }
+
+        // Initial fetch and display
+        sortData();
+
+        var dropdown = document.querySelector(".dropdown select");
+
+        dropdown.addEventListener('change', function () {
+            console.log('Dropdown value changed to: ' + dropdown.value);
+            sortData();
+        });
+
     </script>
 
 </body>
