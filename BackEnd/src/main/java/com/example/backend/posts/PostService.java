@@ -32,7 +32,7 @@ public class PostService {
         String[] splitFormat = format.split(":");
 
         String[] cmd;
-        if (splitFormat.length > 1) {
+        if (splitFormat.length > 0) {
             cmd = new String[]{"python3", "/home/madhacks698/madhacks/MadHacks/BackEnd/src/main/java/com/example/backend/posts/get_json.py", splitFormat[1]};
         } else {
             cmd = new String[]{"python3", "/home/madhacks698/madhacks/MadHacks/BackEnd/src/main/java/com/example/backend/posts/get_json.py"};
