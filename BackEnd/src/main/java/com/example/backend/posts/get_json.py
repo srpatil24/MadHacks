@@ -8,6 +8,8 @@ import pandas as pd
 args = sys.argv
 if len(args) > 1:
     category = args[1]
+else:
+    category = None
 
 # Connect to database
 path_to_db = "../../../../../../../../WebScraping/clubs.db"
@@ -15,7 +17,7 @@ path_to_db = "../../../../../../../../WebScraping/clubs.db"
 conn = sqlite3.connect(path_to_db)
 c = conn.cursor()
 
-all_posts = pd.read_sql_query("SELECT * FROM media", conn)
+all_posts = pd.read_sql_query("SELECT * FROM media3", conn)
 
 # Filter posts to past 5 days
 today = datetime.date.today()
@@ -55,13 +57,27 @@ for index, row in recent_posts.iterrows():
         to_json.at[index, 'clubDescription'] = club_info.get('description')
         
         
+club_categories = pd.read_sql_query("SELECT * FROM club_categories", conn)
+
+category_mapping = pd.read_sql_query("SELECT * FROM categories", conn)
+# dict where key is category_name, and id is category_id
+category_mapping = dict(zip(category_mapping['category_name'], category_mapping['category_id']))
+
 # # Filter by category if specified
-# if category:
-#     to_json = to_json[to_json['clubName'] == category]
+# print(to_json.columns)
+if category:
+    for index, row in to_json.iterrows():
+        club_name = row['clubName']
+        club_id = clubs[clubs['club_name'] == club_name].iloc[0]['club_id']
+        club_cat_ids = club_categories[club_categories['club_id'] == club_id]
+        if category_mapping[category] not in club_cat_ids['category_id'].values:
+            to_json.drop(index, inplace=True)
 
 
 # Make date prettier
 to_json["date"] = pd.to_datetime(to_json["date"]).dt.strftime("%B %d, %Y")
+
+
 
 # Write df to json file
 to_json.to_json("posts.json", orient="records")
